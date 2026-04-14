@@ -10,17 +10,17 @@
 -------------------------------- */
 /* Wrapper (Global) */
 #silktide-wrapper {
-              --focus: 0 0 0 2px #ffffff, 0 0 0 4px #000000, 0 0 0 6px #ffffff;
-              --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
-              --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
-              --primaryColor: #c8a76f;
-              --backgroundColor: #005f6d;
-              --textColor: #FFFFFF;
-              --backdropBackgroundColor: #00000033;
-              --backdropBackgroundBlur: 0px;
-              --cookieIconColor: #c8a76f;
-              --cookieIconBackgroundColor: #005f6d;
-              position: fixed;
+  --focus: 0 0 0 2px #ffffff, 0 0 0 4px #000000, 0 0 0 6px #ffffff;
+  --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
+  --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
+  --primaryColor: #c8a76f;
+  --backgroundColor: #1a3940;
+  --textColor: #FFFFFF;
+  --backdropBackgroundColor: #00000033;
+  --backdropBackgroundBlur: 0px;
+  --cookieIconColor: #c8a76f;
+  --cookieIconBackgroundColor: #1a3940;
+  position: fixed;
   bottom: 0;
   right: 0;
   width: 100%;
@@ -31,7 +31,7 @@
   display: flex;
   justify-content: center;
   align-items: center
-            }
+}
 
 /* Backdrop (Global) */
 #silktide-backdrop-global {
@@ -94,8 +94,7 @@
   border-radius: 5px;
 }
 
-#silktide-wrapper .st-button--primary {
-}
+#silktide-wrapper .st-button--primary {}
 
 #silktide-wrapper .st-button--primary:hover {
   background-color: var(--backgroundColor);
@@ -214,7 +213,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  fill: var(--primaryColor); /* passed down to svg > path */
+  fill: var(--primaryColor);
+  /* passed down to svg > path */
   margin-left: auto;
   width: 48px;
   height: 48px;
@@ -311,13 +311,17 @@
 }
 
 #silktide-modal section::-webkit-scrollbar {
-  display: block; /* Force scrollbars to show */
-  width: 5px; /* Width of the scrollbar */
+  display: block;
+  /* Force scrollbars to show */
+  width: 5px;
+  /* Width of the scrollbar */
 }
 
 #silktide-modal section::-webkit-scrollbar-thumb {
-  background-color: var(--textColor); /* Color of the scrollbar thumb */
-  border-radius: 10px; /* Rounded corners for the thumb */
+  background-color: var(--textColor);
+  /* Color of the scrollbar thumb */
+  border-radius: 10px;
+  /* Rounded corners for the thumb */
 }
 
 #silktide-modal p {
@@ -353,7 +357,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 24px;  
+  gap: 24px;
 }
 
 /* --------------------------------
@@ -422,26 +426,26 @@
 }
 
 /* Checked Switch Styles */
-#silktide-modal .switch input:checked + .switch__pill {
+#silktide-modal .switch input:checked+.switch__pill {
   background: var(--primaryColor);
 }
 
-#silktide-modal .switch input:checked ~ .switch__dot {
+#silktide-modal .switch input:checked~.switch__dot {
   left: calc(100% - 32px);
 }
 
-#silktide-modal .switch input:checked ~ .switch__off {
+#silktide-modal .switch input:checked~.switch__off {
   right: calc(100% - 32px);
   opacity: 0;
 }
 
-#silktide-modal .switch input:checked ~ .switch__on {
+#silktide-modal .switch input:checked~.switch__on {
   right: calc(100% - 34px);
   opacity: 1;
 }
 
 /* Disabled Switch Styles */
-#silktide-modal .switch input:disabled + .switch__pill {
+#silktide-modal .switch input:disabled+.switch__pill {
   opacity: 0.65;
   cursor: not-allowed;
 }
@@ -519,6 +523,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -529,6 +534,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -540,6 +546,7 @@
     opacity: 0;
     transform: translate(-50%, calc(-50% - 20px));
   }
+
   to {
     opacity: 1;
     transform: translate(-50%, -50%);
@@ -551,6 +558,7 @@
     opacity: 0;
     transform: translate(-50%, -20px);
   }
+
   to {
     opacity: 1;
     transform: translate(-50%, 0);
@@ -562,6 +570,7 @@
     opacity: 0;
     transform: translate(0px, 20px);
   }
+
   to {
     opacity: 1;
     transform: translate(0px, 0px);
