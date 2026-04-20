@@ -149,37 +149,37 @@
     .page-hero {
       position: relative;
       padding: 10rem 0 4rem;
-      background: var(--primary);
+      background: var(--surface-variant);
       overflow: hidden;
-      border-bottom: 5px solid var(--tertiary);
+      border-bottom: 2px solid #c8cbcc;
     }
 
     .page-hero__bg {
       position: absolute;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1584415942461-a2006d774f60?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
-      opacity: 0.2;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(var(--primary-rgb, 26, 86, 219), .12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(var(--tertiary-rgb, 212, 175, 55), .08) 0%, transparent 60%);
+      z-index: 1;
     }
 
     .page-hero__title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 0.75rem;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--on-surface);
+      margin-bottom: 1rem;
     }
 
     .page-hero__title span {
-      color: var(--tertiary);
+      color: var(--primary);
     }
 
     .page-hero__subtitle {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.6);
-      max-width: 600px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--on-surface-variant);
+      max-width: 640px;
+      line-height: 1.7;
     }
 
     /* Coach intro */
@@ -213,14 +213,16 @@
     }
 
     .coach-intro__label {
-      font-family: 'Manrope', sans-serif;
-      font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.15);
       color: var(--tertiary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
       margin-bottom: 1rem;
-      display: block;
     }
 
     .coach-intro__title {
@@ -731,14 +733,16 @@
     }
 
     .nolio-split__label {
-      font-family: 'Manrope', sans-serif;
-      font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.15);
       color: var(--tertiary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
       margin-bottom: 0.75rem;
-      display: block;
     }
 
     .nolio-split__heading {

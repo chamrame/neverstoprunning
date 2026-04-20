@@ -3,16 +3,16 @@
    Accordion · Parallax quote · Marquee · Gallery · Carousel
    ============================================================ */
 
-document.addEventListener('DOMContentLoaded', function () {
-
 function toggleMoment(btn) {
-      var item = btn.closest('.moment-item');
-      var wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.moment-item').forEach(function (el) {
-        el.classList.remove('open');
-      });
-      if (!wasOpen) item.classList.add('open');
-    }
+  var item = btn.closest('.moment-item');
+  var wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.moment-item').forEach(function (el) {
+    el.classList.remove('open');
+  });
+  if (!wasOpen) item.classList.add('open');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
 
     /* Parallax quote */
     var quoteParallaxBg = document.getElementById('quoteParallaxBg');

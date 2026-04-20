@@ -507,26 +507,126 @@
     }
 
     .prestations__header .text-label {
-      color: var(--tertiary);
       margin-bottom: 1rem;
-      display: block;
     }
 
     .prestations__header .text-headline span {
       color: var(--tertiary);
     }
 
-    .prestations__grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
+    /* ---- Slider prestations ---- */
+    .prestations__slider-wrap {
+      position: relative;
+      overflow: hidden;
+      padding: 2.5rem 0;   /* respiration verticale pour le scale */
+      margin: 0 -0.5rem;
     }
 
-    @media (min-width: 768px) {
-      .prestations__grid {
-        grid-template-columns: 1fr 1fr 1fr;
+    .prestations__slider {
+      display: flex;
+      will-change: transform;
+      gap: 1.5rem;
+    }
+
+    /* Mobile : 1 carte pleine largeur */
+    .prestations__slider .pricing-card {
+      flex: 0 0 100%;
+      max-width: 100%;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Desktop : 3 cartes — calcul exact : (100% - 2 gaps) / 3 */
+    @media (min-width: 640px) {
+      .prestations__slider .pricing-card {
+        flex: 0 0 calc(33.333% - 1rem);
+        max-width: calc(33.333% - 1rem);
+        padding: 2.5rem;
       }
     }
+
+    /* Transition ease-in-out sur toutes les propriétés visuelles */
+    .prestations__slider .pricing-card {
+      transition: background 0.3s ease-in-out,
+                  color      0.3s ease-in-out,
+                  box-shadow 0.3s ease-in-out,
+                  transform  0.3s ease-in-out;
+    }
+
+    /* Carte centrale : scale discret + z-index pour passer devant */
+    .prestations__slider .pricing-card--featured {
+      transform: scale(1.06);
+      z-index: 5;
+    }
+
+    /* Cartes latérales : pas de scale au hover */
+    .prestations__slider .pricing-card--default:hover {
+      transform: none;
+    }
+
+    /* Survol carte centrale → style initial fond blanc */
+    .prestations__slider .pricing-card--featured:hover {
+      background: white;
+      color: var(--on-surface);
+      transform: none;
+      box-shadow: inset 0 0 0 3px var(--tertiary), var(--shadow-strong);
+    }
+    .prestations__slider .pricing-card--featured:hover .pricing-card__desc {
+      color: var(--on-surface-variant);
+    }
+    .prestations__slider .pricing-card--featured:hover .pricing-card__feature {
+      color: var(--on-surface);
+    }
+    .prestations__slider .pricing-card--featured:hover .pricing-card__price {
+      color: var(--primary);
+    }
+    .prestations__slider .pricing-card--featured:hover .pricing-card__price span {
+      color: var(--on-surface-variant);
+    }
+    .prestations__slider .pricing-card--featured:hover .pricing-card__icon {
+      color: var(--tertiary);
+    }
+    .prestations__slider .pricing-card--featured:hover .pricing-card__title {
+      color: var(--primary);
+    }
+
+    /* Bouton de la carte centrale */
+    .prestations__slider .pricing-card--featured .pricing-card__btn--outline {
+      border-color: var(--tertiary);
+      color: var(--tertiary);
+    }
+    .prestations__slider .pricing-card--featured:hover .pricing-card__btn--outline {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: transparent;
+    }
+
+    /* Navigation */
+    .prestations__nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--tertiary);
+      color: var(--tertiary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .prestations__nav-btn:hover {
+      background: var(--tertiary);
+      color: var(--on-surface);
+    }
+
+    .prestations__nav-btn--prev { left: 0.5rem; }
+    .prestations__nav-btn--next { right: 0.5rem; }
 
     .pricing-card {
       padding: 2.5rem;
@@ -923,9 +1023,9 @@
     }
 
     .about__label {
-      color: var(--tertiary);
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
       margin-bottom: 1.5rem;
-      display: block;
     }
 
     .about__title {
@@ -1623,9 +1723,16 @@
     }
 
     .checker__label {
+      display: block;
+      background: none;
+      padding: 0;
+      border-radius: 0;
       color: var(--tertiary);
       margin-bottom: 0.6rem;
-      display: block;
+    }
+
+    .checker__cell--dark .checker__label {
+      color: var(--tertiary);
     }
 
     .checker__title {
@@ -1691,9 +1798,7 @@
     }
 
     .testimonials__header .text-label {
-      color: var(--tertiary);
       margin-bottom: 1rem;
-      display: block;
     }
 
     .testimonials__header .text-headline span {

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WPGZCB6M');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching Course à Pied — Mireille Masson, Kiné du Sport à Nevers</title>
+    <meta name="description"
+        content="Découvrez le coaching course à pied de Mireille Masson : analyse de foulée Ochy, bilan personnalisé, forfaits Débutant, Évolution et Performance. Une approche unique alliant kinésithérapie du sport et entraînement running à Nevers.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Coaching Course à Pied — Mireille Masson, Kiné du Sport">
+    <meta property="og:description"
+        content="Analyse de foulée, bilan personnalisé et programmes de course à pied par une kinésithérapeute du sport à Nevers.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Fonts & Styles -->
+    <link rel="stylesheet" href="assets/css/fonts.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+
+    <style>
+        /* ============================================================
+       Styles spécifiques — coaching-course-a-pied.html
+       ============================================================ */
+
+        /* ---- Page Hero ------------------------------------------- */
+        .page-hero {
+            position: relative;
+            padding: 10rem 0 4rem;
+            background: var(--surface-variant);
+            overflow: hidden;
+            border-bottom: 2px solid #c8cbcc;
+        }
+
+        .page-hero__bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0, 131, 150, .10) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 80%, rgba(200, 167, 111, .08) 0%, transparent 60%);
+            z-index: 1;
+        }
+
+        .page-hero__content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero__tag {
+            display: inline-block;
+            background: rgba(200, 167, 111, 0.18);
+            color: var(--on-surface);
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--tertiary);
+        }
+
+        .page-hero__title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            line-height: 1.15;
+            color: var(--on-surface);
+            margin-bottom: 1rem;
+        }
+
+        .page-hero__title span {
+            color: var(--primary);
+        }
+
+        .page-hero__subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--on-surface-variant);
+            max-width: 820px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .page-hero__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-hero__actions .btn-primary {
+            padding: 1.1rem 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        .page-hero__actions .btn-outline-hero {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 1.1rem 2.5rem;
+            border-radius: var(--radius-md);
+            transition: background 0.3s, color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .page-hero__actions .btn-outline-hero:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .page-hero__badge {
+            display: none;
+        }
+
+        /* ---- Images confinées dans leur colonne ------------------- */
+        /* On-left : centrage dans la colonne sans débordement latéral */
+        .split__float--on-left {
+            left: 10%;
+            top: 5%;
+            width: 80%;
+            transform: none;
+        }
+
+        /* Duo-back : image haute-gauche */
+        .split__float--duo-back {
+            left: 2%;
+            top: 0%;
+            width: 54%;
+        }
+
+        /* Duo-front : image basse-droite, décalée vers le bas */
+        .split__float--duo-front {
+            right: 2%;
+            top: 38%;
+            bottom: auto;
+            width: 51%;
+        }
+
+        /* ---- Étiquette prix dans les blocs split ------------------ */
+        .split__price-tag {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.4rem;
+            margin: 0.4rem 0 1.5rem;
+            padding: 0.65rem 1.4rem;
+            background: var(--surface-container-low);
+            border-left: 3px solid var(--tertiary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .split__price-amount {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 900;
+            font-size: 1.9rem;
+            color: var(--primary);
+        }
+
+        .split__price-period {
+            font-size: 0.85rem;
+            color: var(--on-surface-variant);
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* ---- CTA sombre avec photo de fond ----------------------- */
+        .coach-cta {
+            padding: 7rem 0;
+            background: var(--primary);
+            text-align: center;
+            border-top: 5px solid var(--tertiary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coach-cta__bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?q=80&w=1600&auto=format&fit=crop') center / cover no-repeat;
+            opacity: 0.1;
+        }
+
+        .coach-cta__inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .coach-cta__tag {
+            display: inline-block;
+            background: rgba(200, 167, 111, 0.22);
+            color: var(--tertiary);
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .coach-cta__title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 1.2rem;
+        }
+
+        .coach-cta__title span {
+            color: var(--tertiary);
+        }
+
+        .coach-cta__text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.62);
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .coach-cta__actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .coach-cta__actions .btn-primary {
+            padding: 1.2rem 2.8rem;
+            font-size: 1rem;
+        }
+
+        .coach-cta__actions .btn-outline-white {
+            border: 2px solid rgba(255, 255, 255, 0.42);
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 1.2rem 2.8rem;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .coach-cta__actions .btn-outline-white:hover {
+            background: white;
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WPGZCB6M" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- ============ NAV ============ -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo">Nevers<span class="nav__logo-accent">Top&nbsp;Running</span></a>
+            <div class="nav__links">
+                <a href="index.html" class="nav__link">Accueil</a>
+                <a href="index.html#prestations" class="nav__link">Prestations</a>
+                <a href="coaching-course-a-pied.html" class="nav__link active"
+                    style="color:var(--tertiary);">Coaching</a>
+                <a href="coach-running.html" class="nav__link">À Propos</a>
+                <a href="index.html#contact" class="nav__link">Contact</a>
+            </div>
+            <div class="nav__cta-wrap" style="display:flex;">
+                <a href="https://www.nolio.io/coach/masson.mireille40@gmail.com/" target="_blank" rel="noopener"
+                    class="nav__cta">S'entraîner</a>
+            </div>
+            <button class="nav__burger" id="burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="nav__mobile" id="mobileMenu">
+        <a href="index.html" class="mobile-link">Accueil</a>
+        <a href="index.html#prestations" class="mobile-link">Prestations</a>
+        <a href="coaching-course-a-pied.html" class="mobile-link" style="color:var(--tertiary);">Coaching</a>
+        <a href="coach-running.html" class="mobile-link">À Propos</a>
+        <a href="index.html#contact" class="mobile-link">Contact</a>
+        <a href="https://www.nolio.io/coach/masson.mireille40@gmail.com/" target="_blank" rel="noopener"
+            class="mobile-link" style="color:var(--tertiary);">S'entraîner</a>
+    </div>
+
+    <!-- ============ PAGE HERO ============ -->
+    <section class="page-hero">
+        <div class="page-hero__bg"></div>
+
+        <div class="container">
+            <div class="page-hero__content">
+                <!-- Fil d'Ariane -->
+                <nav class="page-hero__breadcrumb" aria-label="Fil d'Ariane">
+                    <a href="index.html">Accueil</a>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                    <span>Coaching Course à Pied</span>
+                </nav>
+
+                <span class="page-hero__tag">Kiné du Sport · Coach Running</span>
+
+                <h1 class="page-hero__title">
+                    Coaching<br><span>Course à Pied</span>
+                </h1>
+
+                <p class="page-hero__subtitle">
+                    Des prestations sur-mesure alliant expertise de kinésithérapeute du sport et méthodologie
+                    d'entraînement
+                    rigoureuse. Pour courir juste, progresser sans se blesser et atteindre vos objectifs.
+                </p>
+
+                <div class="page-hero__actions">
+                    <a href="https://www.nolio.io/coach/masson.mireille40@gmail.com/" target="_blank" rel="noopener"
+                        class="btn-primary">Voir les formules sur Nolio</a>
+                    <a href="#methodologie" class="btn-outline-hero">Découvrir la méthode</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-hero__badge">
+            <div class="page-hero__badge-line"></div>
+            <span class="page-hero__badge-text">Coaching running par une kiné du sport</span>
+        </div>
+    </section>
+
+    <!-- ============ SPLIT SECTION — 6 BLOCS ALTERNÉS ============ -->
+    <section class="split-section" id="methodologie">
+        <div class="hero__gridlines">
+            <div class="hero__gridline hero__gridline--left">
+                <div class="hero__gridline-inner" data-speed="0.4" data-offset="20"></div>
+            </div>
+            <div class="hero__gridline hero__gridline--center">
+                <div class="hero__gridline-inner" data-speed="0.6" data-offset="70"></div>
+            </div>
+            <div class="hero__gridline hero__gridline--right">
+                <div class="hero__gridline-inner" data-speed="0.3" data-offset="40"></div>
+            </div>
+        </div>
+
+        <!-- ── Bloc 1 : Image gauche · Texte droite ───────────────── -->
+        <!-- La kinésithérapie au service de votre course -->
+        <div class="split reveal">
+            <div class="split__img">
+                <div class="split__float split__float--on-left" data-float-speed="-0.12">
+                    <img src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?q=80&w=800&auto=format&fit=crop"
+                        alt="Analyse biomécanique" loading="lazy">
+                </div>
+            </div>
+            <div class="split__body">
+                <span class="text-label split__label">Approche unique</span>
+                <h2 class="split__title">La kinésithérapie<br>au service de votre <span>foulée</span></h2>
+                <p class="split__text">En tant que kinésithérapeute du sport, je ne me contente pas de vous donner un
+                    plan
+                    d'entraînement. J'analyse votre biomécanique, détecte les déséquilibres musculaires et articulaires,
+                    et
+                    construis un programme qui respecte votre corps tout en le poussant vers de nouveaux objectifs.</p>
+                <ul class="split__list">
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Analyse posturale et biomécanique complète</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Prévention des blessures intégrée dès le premier jour</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Protocoles de reprise après blessure ou arrêt prolongé</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Expertise unique : 30 ans de kinésithérapie + coaching running</li>
+                </ul>
+                <a href="coach-running.html" class="btn-primary" style="align-self:flex-start;">Découvrir mon
+                    parcours</a>
+            </div>
+        </div>
+
+        <!-- ── Bloc 2 : Texte gauche · Duo images droite ──────────── -->
+        <!-- Prestation Rencontre & Bilan — 30 € -->
+        <div class="split split--reverse reveal">
+            <div class="split__img">
+                <div class="split__float split__float--duo-back" data-float-speed="0.15">
+                    <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=800&auto=format&fit=crop"
+                        alt="Entretien coaching" loading="lazy">
+                </div>
+                <div class="split__float split__float--duo-front" data-float-speed="-0.1">
+                    <img src="https://images.unsplash.com/photo-1486218119243-13301879a3f4?q=80&w=800&auto=format&fit=crop"
+                        alt="Bilan sportif" loading="lazy">
+                </div>
+            </div>
+            <div class="split__body">
+                <span class="text-label split__label">Point de départ</span>
+                <h2 class="split__title">Commençons<br>par nous <span>rencontrer</span></h2>
+                <div class="split__price-tag">
+                    <span class="split__price-amount">30 €</span>
+                    <span class="split__price-period">/ séance de 30 min</span>
+                </div>
+                <p class="split__text">Avant tout programme, il faut se connaître. En 30 minutes, j'évalue votre
+                    condition
+                    physique actuelle, vos objectifs et vos contraintes pour vous proposer la formule la plus adaptée à
+                    votre
+                    profil. Un premier rendez-vous sans engagement, en présentiel ou en vidéo.</p>
+                <ul class="split__list">
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Entretien en présentiel ou en visioconférence</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Évaluation de votre profil physique et de vos objectifs</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Proposition d'un plan d'accompagnement personnalisé</li>
+                </ul>
+                <a href="https://www.nolio.io/coach/masson.mireille40@gmail.com/" target="_blank" rel="noopener"
+                    class="btn-primary" style="align-self:flex-start;">Réserver mon bilan sur Nolio</a>
+            </div>
+        </div>
+
+        <!-- ── Bloc 3 : Duo images gauche · Texte droite ─────────── -->
+        <!-- Prestation Profilage de foulée — 30 € -->
+        <div class="split reveal">
+            <div class="split__img">
+                <div class="split__float split__float--duo-back" data-float-speed="0.14">
+                    <img src="https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?q=80&w=800&auto=format&fit=crop"
+                        alt="Analyse de foulée Ochy" loading="lazy">
+                </div>
+                <div class="split__float split__float--duo-front" data-float-speed="-0.10">
+                    <img src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?q=80&w=800&auto=format&fit=crop"
+                        alt="Biomécanique running" loading="lazy">
+                </div>
+            </div>
+            <div class="split__body">
+                <span class="text-label split__label">Analyse technique</span>
+                <h2 class="split__title">Votre foulée<br><span>décortiquée</span></h2>
+                <div class="split__price-tag">
+                    <span class="split__price-amount">30 €</span>
+                    <span class="split__price-period">/ séance</span>
+                </div>
+                <p class="split__text">Grâce à l'outil <strong>Ochy</strong> (analyse vidéo biomécanique certifiée) et à
+                    vos
+                    données de montre connectée, j'identifie les asymétries, les compensations et les zones à risque. Un
+                    diagnostic chiffré et objectif de votre technique de course — indispensable avant tout programme
+                    sérieux.</p>
+                <ul class="split__list">
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Analyse vidéo de la foulée via Ochy</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Lecture des données GPS, cadence, fréquence cardiaque</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Bilan complet et recommandations personnalisées</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Identification des déséquilibres et zones à risque</li>
+                </ul>
+                <a href="https://www.nolio.io/coach/masson.mireille40@gmail.com/" target="_blank" rel="noopener"
+                    class="btn-primary" style="align-self:flex-start;">Prendre rendez-vous sur Nolio</a>
+            </div>
+        </div>
+
+        <!-- ── Bloc 4 : Texte gauche · Duo images droite ──────────── -->
+        <!-- Forfaits Débutant (60 €/mois) & Évolution (90 €/mois) -->
+        <div class="split split--reverse reveal">
+            <div class="split__img">
+                <div class="split__float split__float--duo-back" data-float-speed="-0.13">
+                    <img src="https://images.unsplash.com/photo-1516398810565-0cb4310bb8ea?q=80&w=800&auto=format&fit=crop"
+                        alt="Running débutant" loading="lazy">
+                </div>
+                <div class="split__float split__float--duo-front" data-float-speed="0.11">
+                    <img src="https://images.unsplash.com/photo-1456613820599-bfe244172af5?q=80&w=800&auto=format&fit=crop"
+                        alt="Trail running" loading="lazy">
+                </div>
+            </div>
+            <div class="split__body">
+                <span class="text-label split__label">Forfaits mensuels</span>
+                <h2 class="split__title">Un programme<br>pour <span>chaque niveau</span></h2>
+                <p class="split__text">Que vous enfilerez vos premières chaussures de running ou que vous prépariez un
+                    objectif
+                    de chrono, j'ai conçu des formules progressives et claires. Chaque programme est disponible sur
+                    l'application
+                    Nolio pour un suivi complet, accessible partout et en temps réel.</p>
+                <ul class="split__list">
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        <strong>Forfait Débutant (60 €/mois)</strong> : programme progressif + suivi hebdo
+                    </li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        <strong>Forfait Évolution (90 €/mois)</strong> : planification annuelle + analyse data
+                    </li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Accès à l'application Nolio inclus dans tous les forfaits</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Adaptation hebdomadaire selon vos sensations et votre vie</li>
+                </ul>
+                <a href="https://www.nolio.io/coach/masson.mireille40@gmail.com/" target="_blank" rel="noopener"
+                    class="btn-primary" style="align-self:flex-start;">Voir les formules sur Nolio</a>
+            </div>
+        </div>
+
+        <!-- ── Bloc 5 : Image gauche · Texte droite ───────────────── -->
+        <!-- Méthodologie : suivi hebdomadaire & application Nolio -->
+        <div class="split reveal">
+            <div class="split__img">
+                <div class="split__float split__float--on-left" data-float-speed="-0.1" style="top:15%;">
+                    <img src="https://images.unsplash.com/photo-1718248028256-aab1460114e2?q=80&w=800&auto=format&fit=crop"
+                        alt="Suivi running Nolio" loading="lazy">
+                </div>
+            </div>
+            <div class="split__body">
+                <span class="text-label split__label">Méthodologie</span>
+                <h2 class="split__title">Un suivi qui<br><span>s'adapte</span> à votre vie</h2>
+                <p class="split__text">Chaque semaine, j'ajuste votre programme en fonction de vos sensations, de vos
+                    données
+                    GPS et de votre emploi du temps. Pas de plan rigide copié-collé : un accompagnement vivant, réactif
+                    et
+                    toujours centré sur vous — disponible sur l'application Nolio.</p>
+                <ul class="split__list">
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Adaptation hebdomadaire basée sur vos data et vos retours</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Réponses à vos questions sous 24h via Nolio</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Séances synchronisées directement sur votre montre</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Compatible Garmin, Polar, Suunto, Coros, Apple Watch…</li>
+                </ul>
+                <a href="coach-running.html" class="btn-primary" style="align-self:flex-start;">Voir la plateforme
+                    Nolio</a>
+            </div>
+        </div>
+
+        <!-- ── Bloc 6 : Texte gauche · Duo images droite ──────────── -->
+        <!-- Forfait Performance — à partir de 130 €/mois -->
+        <div class="split split--reverse reveal">
+            <div class="split__img">
+                <div class="split__float split__float--duo-back" data-float-speed="0.16">
+                    <img src="https://images.unsplash.com/photo-1699134710640-c2b282ba8e11?q=80&w=800&auto=format&fit=crop"
+                        alt="Performance running" loading="lazy">
+                </div>
+                <div class="split__float split__float--duo-front" data-float-speed="-0.12">
+                    <img src="https://images.unsplash.com/photo-1714724983417-1211761da4bc?q=80&w=800&auto=format&fit=crop"
+                        alt="Course compétition" loading="lazy">
+                </div>
+            </div>
+            <div class="split__body">
+                <span class="text-label split__label">Programme Élite</span>
+                <h2 class="split__title">Viser<br>l'<span>excellence</span></h2>
+                <div class="split__price-tag">
+                    <span class="split__price-amount">130 €</span>
+                    <span class="split__price-period">/ mois · à partir de</span>
+                </div>
+                <p class="split__text">Pour les coureurs qui visent un objectif précis — sub 2h au semi, podium en trail
+                    ou
+                    record personnel au marathon. Planification complète (course + renforcement + entraînement croisé),
+                    tests
+                    VMA/vitesse critique et stratégie de course millimétrée.</p>
+                <ul class="split__list">
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Planification complète : course + renforcement + croisé</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Tests VMA et vitesse critique aux moments stratégiques</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Construction de votre stratégie de course sur mesure</li>
+                    <li class="split__list-item"><span class="material-symbols-outlined filled">check_circle</span>
+                        Adaptation hebdomadaire avec suivi détaillé des data</li>
+                </ul>
+                <a href="https://www.nolio.io/coach/masson.mireille40@gmail.com/" target="_blank" rel="noopener"
+                    class="btn-primary" style="align-self:flex-start;">Découvrir le Forfait Performance sur Nolio</a>
+            </div>
+        </div>
+
+    </section><!-- /split-section -->
+
+    <!-- ============ COACH CTA ============ -->
+    <section class="coach-cta">
+        <div class="coach-cta__bg"></div>
+        <div class="coach-cta__inner container">
+            <span class="coach-cta__tag">Commencer maintenant</span>
+            <h2 class="coach-cta__title">Prête à vous <span>accompagner</span></h2>
+            <p class="coach-cta__text">Que vous soyez débutant ou athlète confirmé, je construis avec vous un programme
+                adapté à vos objectifs et à votre corps.</p>
+            <div class="coach-cta__actions">
+                <a href="https://www.nolio.io/coach/masson.mireille40@gmail.com/" target="_blank" rel="noopener"
+                    class="btn-primary">Commencer sur Nolio</a>
+                <a href="mailto:masson.mireille40@gmail.com" class="btn-outline-white">Me contacter par e-mail</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="footer__grid">
+            <div>
+                <span class="footer__logo">Nevers<span style="color:var(--tertiary);">Top&nbsp;Running</span></span>
+                <p class="footer__tagline">Coaching running personnalisé par une kinésithérapeute du sport. Performance,
+                    santé
+                    et plaisir de courir.</p>
+            </div>
+            <div>
+                <h4 class="footer__col-title">Expertise</h4>
+                <div class="footer__links">
+                    <a href="coach-running.html" class="footer__link">Kiné du sport conventionné</a>
+                    <a href="coach-running.html" class="footer__link">Mireille Masson, coach course à pied</a>
+                    <a href="coaching-course-a-pied.html" class="footer__link" style="color:var(--tertiary);">Coaching
+                        Course à Pied</a>
+                    <a href="https://www.nolio.io/coach/masson.mireille40@gmail.com/" target="_blank" rel="noopener"
+                        class="footer__link">Profil Nolio</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer__col-title">Informations</h4>
+                <div class="footer__links">
+                    <a href="mentions-legales.html" class="footer__link">Mentions légales</a>
+                    <a href="index.html#prestations" class="footer__link">Nos prestations</a>
+                    <a href="index.html#apropos" class="footer__link">À propos</a>
+                    <a href="index.html#contact" class="footer__link">Contact</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer__col-title">Nous trouver</h4>
+                <address class="footer__address">99 Rue de Marzy<br>58000 Nevers</address>
+                <a href="tel:+33610165922" class="footer__phone">
+                    <span class="material-symbols-outlined">phone</span> 06 10 16 59 22
+                </a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span class="footer__copy">© 2025 Nevers Top Running — Mireille Masson. Tous droits réservés.</span>
+        </div>
+    </footer>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/index.js" defer></script>
+</body>
+
+</html>

@@ -417,6 +417,162 @@ document.addEventListener('DOMContentLoaded', function () {
       }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
       gallerySlotEls.forEach(function (slot) { galleryObserver.observe(slot); });
 
+      /* ---- Prestations slider (infinite loop, featured center, fade) ---- */
+      (function () {
+        var slider = document.getElementById('prestationsSlider');
+        if (!slider) return;
+
+        var wrap       = slider.parentElement;
+        var prevBtn    = document.getElementById('prestPrev');
+        var nextBtn    = document.getElementById('prestNext');
+
+        // Récupère les cartes d'origine et retire toute classe featured en HTML
+        var realCards  = Array.prototype.slice.call(slider.querySelectorAll('.pricing-card'));
+        var total      = realCards.length; // 4
+
+        realCards.forEach(function (c) {
+          c.classList.remove('pricing-card--featured');
+          c.classList.add('pricing-card--default');
+        });
+
+        // On cherche quelle carte est taguée data-featured pour la mettre au centre au départ
+        var startRealIndex = 0;
+        realCards.forEach(function (c, i) {
+          if (c.dataset.featured === 'true') startRealIndex = i;
+        });
+
+        // Clones : on duplique tout l'ensemble de chaque côté
+        var cloneCount = total;
+        for (var i = total - 1; i >= 0; i--) {
+          slider.insertBefore(realCards[i].cloneNode(true), slider.firstChild);
+        }
+        for (var j = 0; j < total; j++) {
+          slider.appendChild(realCards[j].cloneNode(true));
+        }
+
+        var allCards   = Array.prototype.slice.call(slider.querySelectorAll('.pricing-card'));
+        var isMobile   = function () { return window.innerWidth < 640; };
+        var isAnim     = false;
+        var autoTimer;
+
+        // currentIndex = index dans allCards de la carte au centre (ou la seule visible sur mobile)
+        var currentIndex = cloneCount + startRealIndex; // démarre sur le vrai Débutant
+
+        function getCardWidth() {
+          var style = window.getComputedStyle(slider);
+          var gap = parseFloat(style.gap) || parseFloat(style.columnGap) || 0;
+          return allCards[0].offsetWidth + gap;
+        }
+
+        /* Applique / retire la classe featured avec le fondu CSS */
+        function applyFeatured(targetIndex) {
+          allCards.forEach(function (c) {
+            c.classList.remove('pricing-card--featured');
+            c.classList.add('pricing-card--default');
+          });
+          // Délai d'une frame pour que la transition CSS parte bien de "default"
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              var card = allCards[targetIndex];
+              if (card) {
+                card.classList.add('pricing-card--featured');
+                card.classList.remove('pricing-card--default');
+              }
+            });
+          });
+        }
+
+        /* Retire immédiatement le featured (avant slide) */
+        function clearFeatured() {
+          allCards.forEach(function (c) {
+            c.classList.remove('pricing-card--featured');
+            c.classList.add('pricing-card--default');
+          });
+        }
+
+        /* Positionne le slider — sur mobile 1 carte visible, sinon 3 (center) */
+        function jumpTo(index, animate) {
+          var cardW  = getCardWidth();
+          var offset;
+          if (isMobile()) {
+            offset = -(index * cardW);
+          } else {
+            offset = -((index - 1) * cardW); // carte gauche à la position 0
+          }
+          if (!animate) {
+            slider.style.transition = 'none';
+            slider.style.transform  = 'translateX(' + offset + 'px)';
+            slider.offsetHeight; // force reflow
+          } else {
+            slider.style.transition = 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)';
+            slider.style.transform  = 'translateX(' + offset + 'px)';
+          }
+          currentIndex = index;
+        }
+
+        /* Après la fin de la transition du slider */
+        slider.addEventListener('transitionend', function (e) {
+          // On ignore les transitions des cartes enfants qui remontent par bubbling
+          if (e.target !== slider) return;
+          if (e.propertyName !== 'transform') return;
+          // Rebouclage silencieux si on est dans la zone des clones
+          if (currentIndex >= cloneCount + total) {
+            jumpTo(currentIndex - total, false);
+          } else if (currentIndex < cloneCount) {
+            jumpTo(currentIndex + total, false);
+          }
+          // Applique le featured avec fondu sur la carte en centre
+          applyFeatured(currentIndex);
+          isAnim = false;
+        });
+
+        function slideNext() {
+          if (isAnim) return;
+          isAnim = true;
+          clearFeatured();
+          jumpTo(currentIndex + 1, true);
+        }
+
+        function slidePrev() {
+          if (isAnim) return;
+          isAnim = true;
+          clearFeatured();
+          jumpTo(currentIndex - 1, true);
+        }
+
+        // Position et featured initiaux
+        jumpTo(currentIndex, false);
+        applyFeatured(currentIndex);
+
+        // Boutons
+        if (prevBtn) prevBtn.addEventListener('click', function () { slidePrev(); resetAuto(); });
+        if (nextBtn) nextBtn.addEventListener('click', function () { slideNext(); resetAuto(); });
+
+        // Touch / swipe
+        var touchX = 0;
+        slider.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+        slider.addEventListener('touchend', function (e) {
+          var diff = touchX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) { diff > 0 ? slideNext() : slidePrev(); resetAuto(); }
+        }, { passive: true });
+
+        // Autoplay
+        function startAuto() { autoTimer = setInterval(slideNext, 3500); }
+        function resetAuto()  { clearInterval(autoTimer); startAuto(); }
+        startAuto();
+
+        // Pause au survol
+        wrap.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+        wrap.addEventListener('mouseleave', function () { startAuto(); });
+
+        // Recalcul au resize
+        var rsTimer;
+        window.addEventListener('resize', function () {
+          clearTimeout(rsTimer);
+          rsTimer = setTimeout(function () { jumpTo(currentIndex, false); }, 250);
+        });
+      })();
+
       /* ---- Parallax effect ---- */
       const parallaxBg = document.getElementById('parallaxBg');
       if (parallaxBg) {
