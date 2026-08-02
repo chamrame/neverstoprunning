@@ -1996,3 +1996,56 @@
       }
     }
 
+    /* ============================================
+       CORRECTIFS MOBILE (≤ 767px)
+       ============================================ */
+    @media (max-width: 767px) {
+
+      /* 1. Hero – empêcher le débordement horizontal du titre */
+      .hero .text-display,
+      .hero h1 {
+        white-space: normal !important;
+        word-break: break-word;
+      }
+
+      /* 2. Prestations slider – boutons sous la carte, pas par-dessus */
+      .prestations__slider-wrap {
+        padding-bottom: 4.5rem;
+      }
+      .prestations__nav-btn {
+        top: auto;
+        bottom: 0.5rem;
+        transform: none;
+      }
+      .prestations__nav-btn--prev {
+        left: calc(50% - 48px);
+      }
+      .prestations__nav-btn--next {
+        right: calc(50% - 48px);
+      }
+
+      /* 3. Split reveal – centrer les images */
+      .split__img {
+        min-height: 300px;
+      }
+      .split__float--on-left {
+        top: 0 !important;
+        left: 50% !important;
+        width: 72% !important;
+        transform: translateX(-50%) !important;
+      }
+      /* Duo : masquer l'image de fond, centrer l'image principale */
+      .split__float--duo-back {
+        display: none;
+      }
+      .split__float--duo-front {
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        top: 0;
+        width: 72%;
+        transform: translateX(-50%);
+        border: none;
+      }
+    }
+
