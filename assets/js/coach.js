@@ -14,6 +14,24 @@ function toggleMoment(btn) {
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    /* Scroll fade-in — .coach-intro__grid */
+    var grids = document.querySelectorAll('.coach-intro__grid');
+    if (grids.length && 'IntersectionObserver' in window) {
+      var gridObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            gridObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      grids.forEach(function (el) { gridObserver.observe(el); });
+    } else {
+      /* Fallback : tout afficher si IntersectionObserver absent */
+      grids.forEach(function (el) { el.classList.add('is-visible'); });
+    }
+
+
     /* Parallax quote */
     var quoteParallaxBg = document.getElementById('quoteParallaxBg');
     if (quoteParallaxBg) {

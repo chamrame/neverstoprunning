@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
       const realCards = track.querySelectorAll('.testimonial-card');
-      const totalReal = realCards.length; // 5
+      const totalReal = realCards.length; // auto
       var autoplayInterval;
 
       // Clone cards at the end AND start for seamless infinite loop
@@ -319,11 +319,53 @@ document.addEventListener('DOMContentLoaded', function () {
       }, { passive: true });
       updateGalleryFloat();
 
-      /* ---- Coach gallery: image crossfade per slot ---- */
+      /* ---- Coach gallery: random image pool + crossfade per slot ---- */
+      var focusPhotos = [];
+      for (var n = 1; n <= 41; n++) {
+        if (n !== 17) focusPhotos.push('assets/img/photos/focus_' + n + '.jpeg');
+      }
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
       var gallerySlots = document.querySelectorAll('.coach-gallery__slot');
+      var usedFirsts = [];
+
       gallerySlots.forEach(function (slot) {
+        // Pick a random starting image (avoid repeating firsts across slots)
+        var pool = shuffle(focusPhotos.filter(function (p) { return usedFirsts.indexOf(p) === -1; }));
+        var first = pool[0];
+        usedFirsts.push(first);
+
+        // Build a set of 4 images for this slot (first + 3 others, all unique per slot)
+        var rest = shuffle(focusPhotos.filter(function (p) { return p !== first; })).slice(0, 3);
+        var slotImages = [first].concat(rest);
+
+        // Replace/add <img> elements in the slot
+        var existingImg = slot.querySelector('img');
+        var altText = existingImg ? existingImg.alt : '';
+
+        // Remove all existing imgs
+        slot.querySelectorAll('img').forEach(function (el) { el.remove(); });
+
+        // Insert new imgs before the insta overlay
+        var instaDiv = slot.querySelector('.coach-gallery__insta');
+        slotImages.forEach(function (src, i) {
+          var img = document.createElement('img');
+          img.src = src;
+          img.alt = altText;
+          if (i === 0) img.classList.add('active');
+          slot.insertBefore(img, instaDiv);
+        });
+
+        // Crossfade
         var imgs = slot.querySelectorAll('img');
-        if (imgs.length < 2) return;
         var current = 0;
         var interval = parseInt(slot.dataset.interval) || 4000;
 
@@ -557,13 +599,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { passive: true });
 
         // Autoplay
-        function startAuto() { autoTimer = setInterval(slideNext, 3500); }
+        function startAuto() { autoTimer = setInterval(slideNext, 6000); }
         function resetAuto()  { clearInterval(autoTimer); startAuto(); }
         startAuto();
 
-        // Pause au survol
-        wrap.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
-        wrap.addEventListener('mouseleave', function () { startAuto(); });
+        // Pause au survol (toute la section)
+        var prestSection = slider.closest('.prestations') || wrap;
+        prestSection.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+        prestSection.addEventListener('mouseleave', function () { startAuto(); });
 
         // Recalcul au resize
         var rsTimer;
