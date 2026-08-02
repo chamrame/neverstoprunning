@@ -2024,7 +2024,37 @@
         right: calc(50% - 48px);
       }
 
-      /* 3. Split reveal – centrer les images */
+      /* 3. Supprimer l'effet de grossissement des cartes prestations */
+      .pricing-card,
+      .pricing-card:hover,
+      .pricing-card--featured,
+      .pricing-card--featured:hover,
+      .prestations__slider .pricing-card--featured {
+        transform: none !important;
+      }
+
+      /* 4. Masquer les deux images spécifiques et leurs conteneurs */
+      img[src$="photo-1571008887538-b36bb32f4571.avif"],
+      img[src$="photo-1596727362302-b8d891c42ab8.avif"],
+      img[src$="photo-1516398810565-0cb4310bb8ea.avif"] {
+        display: none;
+      }
+      /* Masquer aussi les blocs parents qui se retrouveraient vides */
+      .split__float:has(img[src$="photo-1571008887538-b36bb32f4571.avif"]),
+      .split__float:has(img[src$="photo-1596727362302-b8d891c42ab8.avif"]),
+      .split__float:has(img[src$="photo-1516398810565-0cb4310bb8ea.avif"]),
+      .split__img:has(img[src$="photo-1571008887538-b36bb32f4571.avif"]),
+      .split__img:has(img[src$="photo-1596727362302-b8d891c42ab8.avif"]),
+      .split__img:has(img[src$="photo-1516398810565-0cb4310bb8ea.avif"]),
+      .checker__cell--img:has(img[src$="photo-1596727362302-b8d891c42ab8.avif"]),
+      .checker__cell--img:has(img[src$="photo-1516398810565-0cb4310bb8ea.avif"]),
+      .process-card__img:has(img[src$="photo-1571008887538-b36bb32f4571.avif"]),
+      .process-card__img:has(img[src$="photo-1596727362302-b8d891c42ab8.avif"]),
+      .process-card__img:has(img[src$="photo-1516398810565-0cb4310bb8ea.avif"]) {
+        display: none;
+      }
+
+      /* 4. Split reveal – centrer les images restantes */
       .split__img {
         min-height: 300px;
       }
