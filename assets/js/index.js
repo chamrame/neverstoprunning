@@ -9,18 +9,27 @@ document.addEventListener('DOMContentLoaded', function () {
     (function () {
       'use strict';
 
-      /* ---- Random hero image ---- */
+      /* ---- Random hero image ----
+         Images servies en local (AVIF) pour éviter le round-trip CDN Unsplash.
+         La première image est déjà définie dans le src HTML (préchargée par le navigateur).
+         Le JS en choisit une autre aléatoirement parmi les alternatives — sans bloquer le LCP
+         car l'image par défaut est déjà visible pendant le chargement. ---- */
       var heroImages = [
-        'https://images.unsplash.com/photo-1744706908540-c7450689a30a?q=80&w=1400&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1400&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1571008887538-b36bb32f4571?q=80&w=1400&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?q=80&w=1400&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1516398810565-0cb4310bb8ea?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1699134710640-c2b282ba8e11?q=80&w=1932&auto=format&fit=crop'
+        'assets/img/unsplash/photo-1744706908540-c7450689a30a.avif',
+        'assets/img/unsplash/photo-1552674605-db6ffd4facb5.avif',
+        'assets/img/unsplash/photo-1571008887538-b36bb32f4571.avif',
+        'assets/img/unsplash/photo-1596727362302-b8d891c42ab8.avif',
+        'assets/img/unsplash/photo-1516398810565-0cb4310bb8ea.avif',
+        'assets/img/unsplash/photo-1699134710640-c2b282ba8e11.avif'
       ];
       var heroImg = document.getElementById('heroImg');
       if (heroImg) {
-        heroImg.src = heroImages[Math.floor(Math.random() * heroImages.length)];
+        var picked = heroImages[Math.floor(Math.random() * heroImages.length)];
+        /* Ne remplacer le src que si une image différente est tirée au sort,
+           pour ne pas annuler le préchargement de l'image par défaut. */
+        if (picked !== heroImg.getAttribute('src')) {
+          heroImg.src = picked;
+        }
       }
 
 
