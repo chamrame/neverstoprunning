@@ -9,18 +9,26 @@ document.addEventListener('DOMContentLoaded', function () {
     (function () {
       'use strict';
 
-      /* ---- Random hero image ---- */
+      /* ---- Random hero image (AVIF locaux — plus d'appel Unsplash CDN) ----
+         Le premier élément correspond au src statique posé dans le HTML (LCP).
+         Si le tirage aléatoire retombe sur le même, on ne réassigne pas pour
+         éviter de déclencher un second chargement inutile.
+      ---- */
       var heroImages = [
-        'https://images.unsplash.com/photo-1744706908540-c7450689a30a?q=80&w=1400&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1400&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1571008887538-b36bb32f4571?q=80&w=1400&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?q=80&w=1400&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1516398810565-0cb4310bb8ea?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1699134710640-c2b282ba8e11?q=80&w=1932&auto=format&fit=crop'
+        'assets/img/unsplash/photo-1744706908540-c7450689a30a.avif',
+        'assets/img/unsplash/photo-1552674605-db6ffd4facb5.avif',
+        'assets/img/unsplash/photo-1571008887538-b36bb32f4571.avif',
+        'assets/img/unsplash/photo-1596727362302-b8d891c42ab8.avif',
+        'assets/img/unsplash/photo-1516398810565-0cb4310bb8ea.avif',
+        'assets/img/unsplash/photo-1699134710640-c2b282ba8e11.avif'
       ];
       var heroImg = document.getElementById('heroImg');
       if (heroImg) {
-        heroImg.src = heroImages[Math.floor(Math.random() * heroImages.length)];
+        var randomSrc = heroImages[Math.floor(Math.random() * heroImages.length)];
+        // On ne réassigne que si l'image diffère du src déjà préchargé (évite un double request)
+        if (heroImg.src.indexOf(randomSrc) === -1) {
+          heroImg.src = randomSrc;
+        }
       }
 
 
@@ -215,9 +223,9 @@ document.addEventListener('DOMContentLoaded', function () {
       var statsSection = document.querySelector('.stats');
       if (statsSection) statsObserver.observe(statsSection);
 
-      /* ---- Process banner parallax ---- */
+      /* ---- Process banner parallax (désactivé sur mobile pour perf) ---- */
       var processBannerBg = document.getElementById('processBannerBg');
-      if (processBannerBg) {
+      if (processBannerBg && window.innerWidth >= 768) {
         var processBannerImg = processBannerBg.querySelector('img');
         var processBannerTicking = false;
 
@@ -261,70 +269,73 @@ document.addEventListener('DOMContentLoaded', function () {
         if (processGrid) processObserver.observe(processGrid);
       }
 
-      /* ---- Split floating images parallax ---- */
+      /* ---- Split floating images parallax (désactivé sur mobile) ---- */
       var splitFloats = document.querySelectorAll('.split__float[data-float-speed]');
       var splitTicking = false;
 
-      function updateSplitFloats() {
-        var scrollY = window.scrollY;
-        var viewH = window.innerHeight;
-        splitFloats.forEach(function (el) {
-          var section = el.closest('.split');
-          if (!section) return;
-          var rect = section.getBoundingClientRect();
-          if (rect.bottom > 0 && rect.top < viewH) {
-            var speed = parseFloat(el.dataset.floatSpeed) || 0;
-            var progress = (viewH - rect.top) / (viewH + rect.height);
-            var offset = (progress - 0.5) * viewH * speed;
-            el.style.transform = 'translate3d(0,' + offset + 'px,0)';
+      if (splitFloats.length && window.innerWidth >= 768) {
+        function updateSplitFloats() {
+          var scrollY = window.scrollY;
+          var viewH = window.innerHeight;
+          splitFloats.forEach(function (el) {
+            var section = el.closest('.split');
+            if (!section) return;
+            var rect = section.getBoundingClientRect();
+            if (rect.bottom > 0 && rect.top < viewH) {
+              var speed = parseFloat(el.dataset.floatSpeed) || 0;
+              var progress = (viewH - rect.top) / (viewH + rect.height);
+              var offset = (progress - 0.5) * viewH * speed;
+              el.style.transform = 'translate3d(0,' + offset + 'px,0)';
+            }
+          });
+          splitTicking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+          if (!splitTicking) {
+            requestAnimationFrame(updateSplitFloats);
+            splitTicking = true;
           }
-        });
-        splitTicking = false;
+        }, { passive: true });
+        updateSplitFloats();
       }
 
-      window.addEventListener('scroll', function () {
-        if (!splitTicking) {
-          requestAnimationFrame(updateSplitFloats);
-          splitTicking = true;
-        }
-      }, { passive: true });
-      updateSplitFloats();
-
-      /* ---- Coach gallery: floating parallax columns ---- */
+      /* ---- Coach gallery: floating parallax columns (désactivé sur mobile) ---- */
       var galleryCols = document.querySelectorAll('.coach-gallery__col');
       var galleryTicking = false;
 
-      function updateGalleryFloat() {
-        var scrollY = window.scrollY;
-        galleryCols.forEach(function (col) {
-          var section = col.closest('.coach-gallery');
-          if (!section) return;
-          var rect = section.getBoundingClientRect();
-          var viewH = window.innerHeight;
-          if (rect.bottom > 0 && rect.top < viewH) {
-            var speed = parseFloat(col.dataset.speed) || 0;
-            var progress = (viewH - rect.top) / (viewH + rect.height);
-            var offset = (progress - 0.5) * viewH * speed;
-            col.style.transform = 'translate3d(0,' + offset + 'px,0)';
-          }
-        });
-        galleryTicking = false;
-      }
-
-      window.addEventListener('scroll', function () {
-        if (!galleryTicking) {
-          requestAnimationFrame(updateGalleryFloat);
-          galleryTicking = true;
+      if (galleryCols.length && window.innerWidth >= 768) {
+        function updateGalleryFloat() {
+          var scrollY = window.scrollY;
+          galleryCols.forEach(function (col) {
+            var section = col.closest('.coach-gallery');
+            if (!section) return;
+            var rect = section.getBoundingClientRect();
+            var viewH = window.innerHeight;
+            if (rect.bottom > 0 && rect.top < viewH) {
+              var speed = parseFloat(col.dataset.speed) || 0;
+              var progress = (viewH - rect.top) / (viewH + rect.height);
+              var offset = (progress - 0.5) * viewH * speed;
+              col.style.transform = 'translate3d(0,' + offset + 'px,0)';
+            }
+          });
+          galleryTicking = false;
         }
-      }, { passive: true });
-      updateGalleryFloat();
 
-      /* ---- Coach gallery: random image pool + crossfade per slot ---- */
-      var focusPhotos = [];
-      for (var n = 1; n <= 41; n++) {
-        if (n !== 17) focusPhotos.push('assets/img/photos/focus_' + n + '.jpeg');
+        window.addEventListener('scroll', function () {
+          if (!galleryTicking) {
+            requestAnimationFrame(updateGalleryFloat);
+            galleryTicking = true;
+          }
+        }, { passive: true });
+        updateGalleryFloat();
       }
 
+      /* ---- Coach gallery: random image pool + crossfade per slot ----
+         Le setup (création des 40 img tags) est différé jusqu'à ce que la
+         section soit proche du viewport → évite de charger ~40 images au
+         démarrage de la page, ce qui nuit directement au Speed Index mobile.
+      ---- */
       function shuffle(arr) {
         var a = arr.slice();
         for (var i = a.length - 1; i > 0; i--) {
@@ -334,79 +345,100 @@ document.addEventListener('DOMContentLoaded', function () {
         return a;
       }
 
-      var gallerySlots = document.querySelectorAll('.coach-gallery__slot');
-      var usedFirsts = [];
+      function setupGallerySlots() {
+        var focusPhotos = [];
+        for (var n = 1; n <= 41; n++) {
+          if (n !== 17) focusPhotos.push('assets/img/photos/focus_' + n + '.jpeg');
+        }
 
-      gallerySlots.forEach(function (slot) {
-        // Pick a random starting image (avoid repeating firsts across slots)
-        var pool = shuffle(focusPhotos.filter(function (p) { return usedFirsts.indexOf(p) === -1; }));
-        var first = pool[0];
-        usedFirsts.push(first);
+        var gallerySlots = document.querySelectorAll('.coach-gallery__slot');
+        var usedFirsts = [];
 
-        // Build a set of 4 images for this slot (first + 3 others, all unique per slot)
-        var rest = shuffle(focusPhotos.filter(function (p) { return p !== first; })).slice(0, 3);
-        var slotImages = [first].concat(rest);
+        gallerySlots.forEach(function (slot) {
+          // Pick a random starting image (avoid repeating firsts across slots)
+          var pool = shuffle(focusPhotos.filter(function (p) { return usedFirsts.indexOf(p) === -1; }));
+          var first = pool[0];
+          usedFirsts.push(first);
 
-        // Replace/add <img> elements in the slot
-        var existingImg = slot.querySelector('img');
-        var altText = existingImg ? existingImg.alt : '';
+          // Build a set of 4 images for this slot (first + 3 others, all unique per slot)
+          var rest = shuffle(focusPhotos.filter(function (p) { return p !== first; })).slice(0, 3);
+          var slotImages = [first].concat(rest);
 
-        // Remove all existing imgs
-        slot.querySelectorAll('img').forEach(function (el) { el.remove(); });
+          // Replace/add <img> elements in the slot
+          var existingImg = slot.querySelector('img');
+          var altText = existingImg ? existingImg.alt : '';
 
-        // Insert new imgs before the insta overlay
-        var instaDiv = slot.querySelector('.coach-gallery__insta');
-        slotImages.forEach(function (src, i) {
-          var img = document.createElement('img');
-          img.src = src;
-          img.alt = altText;
-          if (i === 0) img.classList.add('active');
-          slot.insertBefore(img, instaDiv);
+          // Remove all existing imgs
+          slot.querySelectorAll('img').forEach(function (el) { el.remove(); });
+
+          // Insert new imgs before the insta overlay
+          var instaDiv = slot.querySelector('.coach-gallery__insta');
+          slotImages.forEach(function (src, i) {
+            var img = document.createElement('img');
+            img.src = src;
+            img.alt = altText;
+            if (i === 0) img.classList.add('active');
+            slot.insertBefore(img, instaDiv);
+          });
+
+          // Crossfade
+          var imgs = slot.querySelectorAll('img');
+          var current = 0;
+          var interval = parseInt(slot.dataset.interval) || 4000;
+
+          setInterval(function () {
+            imgs[current].classList.remove('active');
+            current = (current + 1) % imgs.length;
+            imgs[current].classList.add('active');
+          }, interval);
         });
+      }
 
-        // Crossfade
-        var imgs = slot.querySelectorAll('img');
-        var current = 0;
-        var interval = parseInt(slot.dataset.interval) || 4000;
+      // Déclencher le setup uniquement quand la galerie approche du viewport
+      var coachGallerySection = document.querySelector('.coach-gallery');
+      if (coachGallerySection) {
+        var gallerySetupObserver = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            gallerySetupObserver.disconnect();
+            setupGallerySlots();
+          }
+        }, { rootMargin: '300px 0px' }); // déclenche 300px avant l'entrée dans le viewport
+        gallerySetupObserver.observe(coachGallerySection);
+      }
 
-        setInterval(function () {
-          imgs[current].classList.remove('active');
-          current = (current + 1) % imgs.length;
-          imgs[current].classList.add('active');
-        }, interval);
-      });
-
-      /* ---- Grid line inner parallax ---- */
+      /* ---- Grid line inner parallax (désactivé sur mobile) ---- */
       var gridInners = document.querySelectorAll('.hero__gridline-inner');
       var gridTicking = false;
 
-      function updateGridInners() {
-        var scrollY = window.scrollY;
-        gridInners.forEach(function (inner) {
-          var section = inner.closest('section');
-          if (!section) return;
-          var rect = section.getBoundingClientRect();
-          var viewH = window.innerHeight;
-          if (rect.bottom > 0 && rect.top < viewH) {
-            var speed = parseFloat(inner.dataset.speed) || 0.4;
-            var offset = parseFloat(inner.dataset.offset) || 0;
-            var sectionTop = scrollY + rect.top;
-            var progress = (scrollY - sectionTop + viewH) / (viewH + rect.height);
-            var travel = rect.height * 1.2;
-            var y = (progress * travel * speed) + (offset / 100 * rect.height) - 40;
-            inner.style.transform = 'translate3d(0,' + y + 'px,0)';
-          }
-        });
-        gridTicking = false;
-      }
-
-      window.addEventListener('scroll', function () {
-        if (!gridTicking) {
-          requestAnimationFrame(updateGridInners);
-          gridTicking = true;
+      if (gridInners.length && window.innerWidth >= 768) {
+        function updateGridInners() {
+          var scrollY = window.scrollY;
+          gridInners.forEach(function (inner) {
+            var section = inner.closest('section');
+            if (!section) return;
+            var rect = section.getBoundingClientRect();
+            var viewH = window.innerHeight;
+            if (rect.bottom > 0 && rect.top < viewH) {
+              var speed = parseFloat(inner.dataset.speed) || 0.4;
+              var offset = parseFloat(inner.dataset.offset) || 0;
+              var sectionTop = scrollY + rect.top;
+              var progress = (scrollY - sectionTop + viewH) / (viewH + rect.height);
+              var travel = rect.height * 1.2;
+              var y = (progress * travel * speed) + (offset / 100 * rect.height) - 40;
+              inner.style.transform = 'translate3d(0,' + y + 'px,0)';
+            }
+          });
+          gridTicking = false;
         }
-      }, { passive: true });
-      updateGridInners();
+
+        window.addEventListener('scroll', function () {
+          if (!gridTicking) {
+            requestAnimationFrame(updateGridInners);
+            gridTicking = true;
+          }
+        }, { passive: true });
+        updateGridInners();
+      }
 
       /* ---- Scroll-driven marquees (both directions) ---- */
       function setupMarquee(trackEl, direction) {
@@ -616,9 +648,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       })();
 
-      /* ---- Parallax effect ---- */
+      /* ---- Parallax quote section (désactivé sur mobile) ---- */
       const parallaxBg = document.getElementById('parallaxBg');
-      if (parallaxBg) {
+      if (parallaxBg && window.innerWidth >= 768) {
         const img = parallaxBg.querySelector('img');
         let ticking = false;
 
@@ -628,9 +660,7 @@ document.addEventListener('DOMContentLoaded', function () {
           const viewH = window.innerHeight;
 
           if (rect.bottom > 0 && rect.top < viewH) {
-            // 0 when section enters bottom, 1 when it leaves top
             const progress = 1 - (rect.bottom / (viewH + rect.height));
-            // Shift image from -25% to +25% of section height
             const offset = (progress - 0.5) * rect.height * 0.5;
             img.style.transform = 'translate3d(0,' + offset + 'px,0)';
           }
